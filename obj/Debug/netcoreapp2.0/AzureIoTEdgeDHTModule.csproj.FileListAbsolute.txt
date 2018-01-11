@@ -1,11 +1,10 @@
-c:\Develop\git\AzureIoTEdgeDHTModule\obj\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.csproj.CoreCompileInputs.cache
-c:\Develop\git\AzureIoTEdgeDHTModule\obj\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.AssemblyInfoInputs.cache
-c:\Develop\git\AzureIoTEdgeDHTModule\obj\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.AssemblyInfo.cs
-C:\Develop\git\AzureIoTEdgeDHTModule\obj\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.csprojResolveAssemblyReference.cache
 c:\Develop\git\AzureIoTEdgeDHTModule\bin\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.deps.json
 c:\Develop\git\AzureIoTEdgeDHTModule\bin\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.runtimeconfig.json
 c:\Develop\git\AzureIoTEdgeDHTModule\bin\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.runtimeconfig.dev.json
 c:\Develop\git\AzureIoTEdgeDHTModule\bin\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.dll
 c:\Develop\git\AzureIoTEdgeDHTModule\bin\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.pdb
+c:\Develop\git\AzureIoTEdgeDHTModule\obj\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.csproj.CoreCompileInputs.cache
+c:\Develop\git\AzureIoTEdgeDHTModule\obj\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.AssemblyInfoInputs.cache
+c:\Develop\git\AzureIoTEdgeDHTModule\obj\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.AssemblyInfo.cs
 c:\Develop\git\AzureIoTEdgeDHTModule\obj\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.dll
 c:\Develop\git\AzureIoTEdgeDHTModule\obj\Debug\netcoreapp2.0\AzureIoTEdgeDHTModule.pdb

@@ -98,7 +98,7 @@ namespace AzureIoTEdgeDHTModule
 
             await ioTHubModuleClient.OpenAsync();
 
-            Console.WriteLine("Heartbeat module client initialized.");
+            Console.WriteLine("DHT Edge module client initialized.");
 
             var thread = new Thread(() => ThreadBody(ioTHubModuleClient));
             thread.Start();
@@ -107,7 +107,9 @@ namespace AzureIoTEdgeDHTModule
 
         private static async void ThreadBody(object userContext)
         {
-            var dataLoader = new DHTDataLoader("http://localhost:3000/");
+            var url = "http://172.17.0.1:3000/";
+            Console.WriteLine($"Connecting to DHT sensor via url {url}");
+            var dataLoader = new DHTDataLoader(url);
             while (true)
             {
                 var deviceClient = userContext as DeviceClient;

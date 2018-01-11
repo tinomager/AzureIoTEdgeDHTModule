@@ -7635,11 +7635,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Develop\\git\\AzureIoTEdgeDHTModule\\AzureIoTEdgeDHTModule.csproj",
+      "projectUniqueName": "C:\\Develop\\git\\AzureIoTEdgeDHTModule\\AzureIoTEdgeDHTModule.csproj",
       "projectName": "AzureIoTEdgeDHTModule",
-      "projectPath": "c:\\Develop\\git\\AzureIoTEdgeDHTModule\\AzureIoTEdgeDHTModule.csproj",
+      "projectPath": "C:\\Develop\\git\\AzureIoTEdgeDHTModule\\AzureIoTEdgeDHTModule.csproj",
       "packagesPath": "C:\\Users\\tima\\.nuget\\packages\\",
-      "outputPath": "c:\\Develop\\git\\AzureIoTEdgeDHTModule\\obj\\",
+      "outputPath": "C:\\Develop\\git\\AzureIoTEdgeDHTModule\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
