@@ -107,9 +107,9 @@ namespace AzureIoTEdgeDHTModule
 
         private static async void ThreadBody(object userContext)
         {
-            var url = "http://172.17.0.1:3000/";
+            var url = LocalhostUrl;
             Console.WriteLine($"Connecting to DHT sensor via url {url}");
-            var dataLoader = new DHTDataLoader(url);
+            DataLoader = new DHTDataLoader(url);
             while (true)
             {
                 var deviceClient = userContext as DeviceClient;
@@ -118,21 +118,19 @@ namespace AzureIoTEdgeDHTModule
                 {
                     throw new InvalidOperationException("UserContext doesn't contain " + "expected values");
                 }
+             
+                var data = DataLoader.GetDHTData();
 
-                //TODO: Use dataloader here!
-                
-                var data = dataLoader.GetDHTData();
-
-                DHTMessageBody heartbeatMessageBody;
+                DHTMessageBody dhttMessageBody;
                 if(data == null){
-                    heartbeatMessageBody = new DHTMessageBody{
+                    dhttMessageBody = new DHTMessageBody{
                         timeCreated = DateTime.Now.ToString("hh:mm:ss"),
                         humidity = -1,
                         temperature = -1
                     };
                 }
                 else{
-                    heartbeatMessageBody = new DHTMessageBody
+                    dhttMessageBody = new DHTMessageBody
                                 {
                                     timeCreated = DateTime.Now.ToString("hh:mm:ss"),
                                     humidity = data.Humidity,
@@ -140,7 +138,7 @@ namespace AzureIoTEdgeDHTModule
                                 };
                 }
 
-                var jsonMessage = JsonConvert.SerializeObject(heartbeatMessageBody);
+                var jsonMessage = JsonConvert.SerializeObject(dhttMessageBody);
 
                 var pipeMessage = new Message(Encoding.UTF8.GetBytes(jsonMessage));
 
@@ -148,7 +146,7 @@ namespace AzureIoTEdgeDHTModule
 
                 await deviceClient.SendEventAsync("output1", pipeMessage);
 
-                Console.WriteLine($"DHT data sent {heartbeatMessageBody.timeCreated}");
+                Console.WriteLine($"DHT data sent {dhttMessageBody.timeCreated}: {dhttMessageBody.temperature} |  {dhttMessageBody.humidity}");
 
                 Thread.Sleep(Interval);
             }
@@ -156,6 +154,9 @@ namespace AzureIoTEdgeDHTModule
 
         private static int Interval { get; set; } = 5000;
 
+        private static string LocalhostUrl { get; set; } = "http://172.17.0.1:3000/";
+
+        private static DHTDataLoader DataLoader { get; set; }
         private static Task onDesiredPropertiesUpdate(TwinCollection desiredProperties, object userContext)
         {
             if (desiredProperties.Count == 0)
@@ -182,6 +183,14 @@ namespace AzureIoTEdgeDHTModule
                     Interval = desiredProperties["interval"];
 
                     reportedProperties["interval"] = Interval;
+                }
+
+                if (!string.IsNullOrEmpty(desiredProperties["localhosturl"]))
+                {
+                    LocalhostUrl = desiredProperties["localhosturl"];
+
+                    reportedProperties["localhosturl"] = LocalhostUrl;
+                    DataLoader = new DHTDataLoader(LocalhostUrl);
                 }
 
                 if (reportedProperties.Count > 0)
