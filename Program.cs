@@ -123,11 +123,7 @@ namespace AzureIoTEdgeDHTModule
 
                 DHTMessageBody dhttMessageBody;
                 if(data == null){
-                    dhttMessageBody = new DHTMessageBody{
-                        timeCreated = DateTime.Now.ToString("hh:mm:ss"),
-                        humidity = -1,
-                        temperature = -1
-                    };
+                    Console.WriteLine("Error: Cannot read DHT Data from local machine");
                 }
                 else{
                     dhttMessageBody = new DHTMessageBody
@@ -136,17 +132,17 @@ namespace AzureIoTEdgeDHTModule
                                     humidity = data.Humidity,
                                     temperature = data.Temperature
                                 };
+                
+                    var jsonMessage = JsonConvert.SerializeObject(dhttMessageBody);
+
+                    var pipeMessage = new Message(Encoding.UTF8.GetBytes(jsonMessage));
+
+                    pipeMessage.Properties.Add("content-type", "application/json");
+
+                    await deviceClient.SendEventAsync("output1", pipeMessage);
+
+                    Console.WriteLine($"DHT data sent {dhttMessageBody.timeCreated}: {dhttMessageBody.temperature} |  {dhttMessageBody.humidity}");
                 }
-
-                var jsonMessage = JsonConvert.SerializeObject(dhttMessageBody);
-
-                var pipeMessage = new Message(Encoding.UTF8.GetBytes(jsonMessage));
-
-                pipeMessage.Properties.Add("content-type", "application/json");
-
-                await deviceClient.SendEventAsync("output1", pipeMessage);
-
-                Console.WriteLine($"DHT data sent {dhttMessageBody.timeCreated}: {dhttMessageBody.temperature} |  {dhttMessageBody.humidity}");
 
                 Thread.Sleep(Interval);
             }
@@ -178,14 +174,14 @@ namespace AzureIoTEdgeDHTModule
 
                 var reportedProperties = new TwinCollection();
 
-                if (desiredProperties["interval"] != null)
+                if (desiredProperties.Contains("interval") && desiredProperties["interval"] != null)
                 {
                     Interval = desiredProperties["interval"];
 
                     reportedProperties["interval"] = Interval;
                 }
 
-                if (!string.IsNullOrEmpty(desiredProperties["localhosturl"]))
+                if (desiredProperties.Contains("localhusturl") && !string.IsNullOrEmpty(desiredProperties["localhosturl"]))
                 {
                     LocalhostUrl = desiredProperties["localhosturl"];
 
